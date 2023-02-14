@@ -1,3 +1,6 @@
 *.bk
+*.nix
+*.json
+.replit
 todo.md
 log.html

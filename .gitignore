@@ -1,6 +1,6 @@
-*.bk
+*.php.bk
 *.nix
-*.json
+replit.nix
 .replit
 todo.md
 log.html

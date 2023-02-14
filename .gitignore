@@ -1,6 +1,5 @@
 *.php.bk
 *.nix
-replit.nix
 .replit
 todo.md
 log.html

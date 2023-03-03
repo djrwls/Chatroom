@@ -1,5 +1,17 @@
 <?php
 session_start();
+if(!isset($_SESSION['UserData']['Username'])){
+	header("location:login.php");
+	exit;
+}else{
+      $_SESSION['name'] = $_SESSION['realname'];
+      //Simple login message 
+  if(!isset($_SESSION['login'])){
+      $login_message = "<div class='msgln'><span class='joined-info'>User <b class='user-name-joined'>". $_SESSION['name'] ."</b> has joined the chat session.</span><br></div>";
+    file_put_contents("log.html", $login_message, FILE_APPEND | LOCK_EX);
+  }
+  $_SESSION['login']='yes';
+}
 if(isset($_GET['logout'])){    
 	
 	//Simple exit message 
@@ -7,31 +19,7 @@ if(isset($_GET['logout'])){
     file_put_contents("log.html", $logout_message, FILE_APPEND | LOCK_EX);
   
 	session_destroy();
-	header("Location: index.php"); //Redirect the user 
-}
-if(isset($_POST['enter'])){
-    if($_POST['name'] != ""){
-        $_SESSION['name'] = stripslashes(htmlspecialchars($_POST['name']));
-      //Simple login message 
-      $login_message = "<div class='msgln'><span class='joined-info'>User <b class='user-name-joined'>". $_SESSION['name'] ."</b> has joined the chat session.</span><br></div>";
-    file_put_contents("log.html", $login_message, FILE_APPEND | LOCK_EX);
-    }
-    else{
-        echo '';
-    }
-}
-function loginForm(){
-    echo 
-    '<div id="loginform"> 
-<p>Please enter your name to continue!</p> 
-<form action="index.php" method="post"> 
-<label for="name">Name &mdash;</label> 
-<input type="text" name="name" id="name" /> 
-<label for="pass">Pass &mdash;</label> 
-<input type="text" name="pass" id="pass" /> 
-<input type="submit" name="enter" id="enter" value="Enter" /> 
-</form> 
-</div>';
+	header("Location: login.php"); //Redirect the user 
 }
 ?>
 <!DOCTYPE html>
@@ -41,16 +29,10 @@ function loginForm(){
         <title>WLS Chatroom</title>
         <link rel="stylesheet" href="styles/main.css" />
         <link rel="icon" type="image/x-icon" href="/media/favicon.png">
-      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
     </head>
     <body>
-    <?php
-    if(!isset($_SESSION['name'])){
-        loginForm();
-    }
-    else {
-    ?>
         <div id="wrapper">
             <div id="menu">
                 <p class="welcome">Welcome, <b><?php echo $_SESSION['name']; ?></b></p>
@@ -96,7 +78,7 @@ function loginForm(){
                 }
                 setInterval (loadLog, 500);
                 $("#exit").click(function () {
-                    var exit = confirm("Are you sure you want to logout?");
+                    var exit = confirm("Are you sure you want to end the session?");
                     if (exit == true) {
                     window.location = "index.php?logout=true";
                     }
@@ -105,6 +87,3 @@ function loginForm(){
         </script>
     </body>
 </html>
-<?php
-}
-?>

@@ -1,0 +1,74 @@
+html, css {
+  background-color: #485464;
+}
+
+.login {
+  text-align: center;
+}
+
+#content{
+  margin: 0;
+  padding: 0px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+#content h1 {
+  color: white;
+  font-size: 40px;
+  padding: 0px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 8px;
+  box-sizing: border-box;
+  border: 2px grey;
+  border-radius: 8px;
+}
+
+#LoginButton {
+  background-color: #4d6b6f;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  margin: 10px
+}
+
+
+#LoginButton:hover {
+  background-color: #97c3c8;
+  color: white;
+}
+
+#SignUpButton {
+  background-color: #25393c;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  max-width: 150px;
+  transition-duration: 0.4s;
+  margin: 10px
+}
+
+
+#SignUpButton:hover {
+  background-color: #97c3c8;
+  color: white;
+}

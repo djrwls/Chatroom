@@ -1,15 +1,18 @@
-// I'm sure you're looking at the logins, but they're just tests. No actual logins were used.
-
 <?php session_start(); /* Starts the session */
 	
 	/* Check Login form submitted */	
 	if(isset($_POST['Submit'])){
 		/* Define username and associated password array */
-		$logins = array('Username' => 'Password','Damon' => 'Password','username1' => 'password1', 'Barney'=>'zubarah');
+
+    // Get the contents of the JSON file 
+    $strJsonFileContents = file_get_contents("users.json");
+    // Convert to array 
+		$logins = json_decode($strJsonFileContents, true);
 		
 		/* Check and assign submitted Username and Password to new variable */
 		$Username = isset($_POST['Username']) ? $_POST['Username'] : '';
 		$Password = isset($_POST['Password']) ? $_POST['Password'] : '';
+    $hashPassword = password_hash($Password, PASSWORD_DEFAULT);
 		
 		/* Check Username and Password existence in defined array */		
 		if (isset($logins[$Username]) && $logins[$Username] == $Password){

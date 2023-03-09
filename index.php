@@ -44,6 +44,7 @@ if(isset($_GET['logout'])){
                 $contents = file_get_contents("log.html");          
                 echo $contents;
             }
+             
             ?>
             </div>
             <form name="message" action="">
@@ -85,5 +86,6 @@ if(isset($_GET['logout'])){
                 });
             });
         </script>
+      
     </body>
 </html>

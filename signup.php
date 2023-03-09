@@ -1,25 +1,13 @@
+<?php require("register.class.php")?>
 <?php session_start(); /* Starts the session */
 	
 	/* Check Login form submitted */	
 	if(isset($_POST['Submit'])){
 		/* Define username and associated password array */
-		$logins = array('Username' => 'Password','Damon' => 'Password','username1' => 'password1', 'Barney'=>'zubarah');
 		
 		/* Check and assign submitted Username and Password to new variable */
-		$Username = isset($_POST['Username']) ? $_POST['Username'] : '';
-		$Password = isset($_POST['Password']) ? $_POST['Password'] : '';
+    $user = new RegisterUser($_POST['Username'], $_POST['Password']);
 		
-		/* Check Username and Password existence in defined array */		
-		if (isset($logins[$Username]) && $logins[$Username] == $Password){
-			/* Success: Set session variables and redirect to Protected page  */
-			$_SESSION['UserData']['Username']=$logins[$Username];
-      $_SESSION['realname']=$Username;
-			header("location:index.php");
-			exit;
-		} else {
-			/*Unsuccessful attempt: Set error message */
-			$msg="<span style='color:red'>Invalid username or password</span>";
-		}
 	}
 ?>
 <!DOCTYPE html>
@@ -60,6 +48,8 @@
       <td><input name="Submit" type="submit" value="Sign Up" class="Button3" id="LoginButton"></td>
     </tr>
   </table>
+        <p class="error"><?php echo @$user->error ?></p>
+        <p class="success"><?php echo @$user->success ?></p>
 </form>
 <script>
           const togglePassword = document.querySelector('#togglePassword');
@@ -73,6 +63,7 @@
             this.classList.toggle('fa-eye-slash');
           });
 </script>
+        
     </div>
     </div>
   </body>
